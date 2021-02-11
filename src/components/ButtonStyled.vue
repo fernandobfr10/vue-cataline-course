@@ -1,39 +1,33 @@
 <template>
-  <button :class="['button-styled', color]">{{ text }} - {{ user }}</button>
+  <!-- Essa tag slot será substituída por qualquer conteúdo onde o ButtonStyled for utilizado, neste caso iremos substituir por um icon -->
+  <button :class="['button-styled', color]"><slot /> {{ text }}</button>
+
+  <!-- Usando slots nomeados - Named Slots -->
+  <button :class="['button-styled', color]">
+    <slot name="before" />
+    {{ text }}
+    <slot name="after" />
+  </button>
 </template>
 
 <script lang="ts">
-// Importando o tipo da proprieda,com PropType
-import { defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
 
-// Tipando o que é esperado receber na prop color, uma das opções abaixo
 type color = 'primary' | 'success' | 'danger'
-
-// Criando a interface User, para informar quais propriedas esperam receber que tipo de dados
-interface User {
-  id: number
-  name: string
-}
 
 export default defineComponent({
   props: {
     text: {
-      type: [String, Number], // O tipo de dado que a prop poderá receber somente poderá ser String ou Number
-      required: true // Informando que a prop é obrigatória
-      // default: 'Texto Padrão' // O parâmetro default deve ser usado para quando não existir required, aí teremos um valor default para a prop
+      type: [String, Number],
+      required: true
     },
     color: {
       type: String,
       default: 'primary',
-      // Validando se o valor recebido é um dos esperados, Primary, Success ou Danger
+
       validator: (value: color) => {
         return ['primary', 'success', 'danger'].includes(value)
       }
-    },
-    user: {
-      // Informando que a prop user é do tipo User, indicado na criação da interface User acima
-      type: Object as PropType<User>,
-      required: true
     }
   }
 })
