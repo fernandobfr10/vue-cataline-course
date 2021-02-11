@@ -1,17 +1,23 @@
 <template>
-  <!-- Usando o componente ButtonStyled -->
-  <button-styled />
+  <ButtonStyled text="Login" color="primary" />
+  <ButtonStyled text="Login" color="success" />
+  <ButtonStyled text="Login" color="danger" />
+  <ButtonStyled text="Login" />
+  <ButtonStyled text="Login" :user="user" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-// Importando o componente ButtonStyled
 import ButtonStyled from '@/components/ButtonStyled.vue'
 
 export default defineComponent({
-  // Registrando o componente ButtonStyled
   components: { ButtonStyled },
-  data: () => ({})
+  data: () => ({
+    user: {
+      id: 1,
+      name: 'Fernando'
+    }
+  })
 })
 </script>
 
