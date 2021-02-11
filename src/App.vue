@@ -1,10 +1,10 @@
 <template>
   <button @click="show = !show">Toggle</button>
-  <!-- Alterando o nome padrão, de v-enter-active para entrada e de v-leave-active para saida -->
+  <!-- Usando o appear para iniciar a animação no carregamento da página,de acordo com o boolean do state show, dentro de data -->
   <transition
     enter-active-class="animate__animated animate__slideInLeft"
     leave-active-class="animate__animated animate__slideInRight"
-    @after-enter="action"
+    :appear="show"
   >
     <h1 v-if="show">Cataline</h1>
   </transition>
@@ -16,18 +16,9 @@ import 'animate.css'
 
 export default defineComponent({
   data: () => ({
-    show: false
-  }),
-  methods: {
-    action(element: HTMLElement) {
-      element.classList.add('test')
-    }
-  }
+    show: true
+  })
 })
 </script>
 
-<style>
-.test {
-  background: green;
-}
-</style>
+<style></style>
