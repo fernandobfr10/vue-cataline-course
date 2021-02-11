@@ -1,6 +1,10 @@
 <template>
   <!-- Usando o componente ButtonStyled -->
   <button-styled />
+
+  <!-- O botão abaixo não irá receber a customização do ButtonStyled, pois no ButtonStyled informamos a palavra scoped na tag Style -->
+  <!-- Com isso, acustomização fica somente presa ao escopo do componente -->
+  <button>Login</button>
 </template>
 
 <script lang="ts">
