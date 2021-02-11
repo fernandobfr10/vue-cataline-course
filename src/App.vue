@@ -1,34 +1,42 @@
 <template>
-  <ul>
-    <li @click="view = 'Home'">Home</li>
-    <li @click="view = 'Contact'">Contato</li>
-    <li @click="view = 'About'">Sobre</li>
-  </ul>
-
-  <!-- A propriedade mode serve para ajudar na alternância de elementos -->
-  <transition
+  <button @click="filterAZ">Filter A - Z</button>
+  <button @click="filterZA">Filter Z - A</button>
+  <!-- A tag transition padrão só permite animar um único elemento filho, caso precise animar mais de um, deve envolve-los em uma div por exemplo -->
+  <!-- Mas se quiser animar um item de cada vez, devemos usar a tag transition-group-->
+  <transition-group
     enter-active-class="animate__animated animate__fadeIn"
     leave-active-class="animate__animated animate__fadeOut"
     :appear="show"
     mode="out-in"
   >
-    <component :is="view" />
-  </transition>
+    <!-- A lista abaixo será animada em 3 situações: Adiçao e Remoção de usuário e alteração de posição dos usuários -->
+    <!-- Quando se quer animar a alteração de posição, devemos usar uma classe nova, específica do transition-group,chamada .v-move -->
+    <li v-for="user in users" :key="user">{{ user }}</li>
+  </transition-group>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import 'animate.css'
-import Home from '@/pages/Home.vue'
-import About from '@/pages/About.vue'
-import Contact from '@/pages/Contact.vue'
 
 export default defineComponent({
-  components: { Home, About, Contact },
   data: () => ({
-    view: 'Home'
-  })
+    users: ['Fernando', 'Juliana', 'Manoela', 'Davi', 'Arthur']
+  }),
+  methods: {
+    filterAZ() {
+      this.users.sort()
+    },
+
+    filterZA() {
+      this.users.sort().reverse()
+    }
+  }
 })
 </script>
 
-<style></style>
+<style>
+.v-move {
+  transition: all 0.5s;
+}
+</style>
