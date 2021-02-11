@@ -1,17 +1,20 @@
 <template>
-  <!-- Usando o componente ButtonStyled -->
-  <button-styled />
+  <!-- Ficamos escutando o componente, e quando o evento onClick acontecer no componente, execute a ação informada, no caso action -->
+  <button-styled text="Botão" @onClick="capturarEvent($event)" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-// Importando o componente ButtonStyled
 import ButtonStyled from '@/components/ButtonStyled.vue'
 
 export default defineComponent({
-  // Registrando o componente ButtonStyled
   components: { ButtonStyled },
-  data: () => ({})
+  data: () => ({}),
+  methods: {
+    capturarEvent(event: string) {
+      console.log(event)
+    }
+  }
 })
 </script>
 
