@@ -1,10 +1,5 @@
 <template>
-  <!-- Usando o componente ButtonStyled -->
-  <button-styled />
-
-  <!-- O botão abaixo não irá receber a customização do ButtonStyled, pois no ButtonStyled informamos a palavra scoped na tag Style -->
-  <!-- Com isso, acustomização fica somente presa ao escopo do componente -->
-  <button>Login</button>
+  <ButtonStyled />
 </template>
 
 <script lang="ts">
@@ -19,4 +14,15 @@ export default defineComponent({
 })
 </script>
 
-<style></style>
+<style scoped>
+/* Só é possível estilizar o componente filho, na tag principal do componente, não pegando as tags filhas do mesmo */
+.button-styled {
+  position: absolute;
+  top: 50%;
+}
+
+/* Para estilizar uma tag que seja filha da principal do componente, devemos usar a anotação de estilização profunda, exemplo abaixo */
+::v-deep.button-styled span {
+  color: #000;
+}
+</style>
